@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoNavic - Extension Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 320px;
+      padding: 15px;
+    }
+    h1 {
+      font-size: 20px;
+      color: #10a37f;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2 {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.4;
+    }
+    .api-key-section {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #10a37f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0e8a6c;
+    }
+    .shortcut {
+      background-color: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+      font-style: italic;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <img src="icons/icon48.png" alt="CoNavic Logo" style="width:32px;height:32px;vertical-align:middle;border-radius:8px;">
+    <span>CoNavic</span>
+  </h1>
+  <p>
+    <strong>CoNavic</strong> is a browser extension that brings the power of ChatGPT and browser automation to your fingertips. Instantly access AI assistance, manage tabs, and organize bookmarks using natural language, all from any page.
+  </p>
+  <h2>Key Features</h2>
+  <ul>
+    <li>Open the chat bar anywhere with <span class="shortcut">Ctrl+Shift+K</span></li>
+    <li>Ask ChatGPT questions and get instant, markdown-formatted answers</li>
+    <li>Automate browser tasks: open/close tabs, group tabs, move tabs, and more</li>
+    <li>Organize bookmarks and folders using AI commands</li>
+    <li>All actions are performed securely in your browser</li>
+  </ul>
+
+  <h2>How to Use</h2>
+  <ol>
+    <li>Press <span class="shortcut">Ctrl+Shift+K</span> to open the chat bar</li>
+    <li>Type your question or command (e.g., "Open GitHub in a new tab")</li>
+    <li>Press Enter to send</li>
+    <li>See responses and actions performed instantly</li>
+  </ol>
+  <div class="footer">
+    CoNavic v1.0 &mdash; AI-powered browser navigation and automation
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
