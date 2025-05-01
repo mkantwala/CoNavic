@@ -45,7 +45,7 @@ function createChatBar() {
   // Create input area
   const input = document.createElement('input');
   input.type = 'text';
-  input.placeholder = 'Ask ChatGPT anything...';
+  input.placeholder = 'Ask CoNavic anything...';
   input.classList.add('quickgpt-input');
   input.style.flex = '1';
   input.style.paddingRight = '34px';
