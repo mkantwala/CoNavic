@@ -141,6 +141,3 @@ Free for personal and commercial use.
 **Enjoy using CoNavic! If you find it useful, star the repo and share it with others.**
 ```
 
----
-
-Let me know if you also want a matching `manifest.json` or promo visuals for the Chrome Web Store!
