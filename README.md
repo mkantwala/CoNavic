@@ -135,6 +135,7 @@ Free for personal and commercial use.
 
 - [GitHub Repository](https://github.com/mkantwala/CoNavic)
 - Open issues or discussions for help and suggestions
+- Contact support@suchtech.ca for any queries.
 
 ---
 
