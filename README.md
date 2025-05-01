@@ -8,8 +8,7 @@
 - **ChatGPT Integration:** Ask questions and get instant, markdown-formatted answers
 - **Browser Automation:** Open/close tabs, group tabs, move tabs, and more using natural language
 - **Bookmark Management:** Organize bookmarks and folders with AI commands
-- **Secure & Private:** All actions are performed locally in your browser; no data is sent to third parties except for LLM queries
-- **No API Key Required:** Uses a free, public LLM endpoint for AI responses
+- **No API Key Required:** Uses a free Pollinations.AI, public LLM endpoint for AI responses
 
 ---
 
@@ -70,8 +69,6 @@
 
 ## 🔒 Privacy & Security
 
-- All browser actions (tabs, bookmarks) are performed locally
-- Only your chat queries are sent to the LLM endpoint for AI responses
 - No tracking, no ads, no data collection
 
 ---
