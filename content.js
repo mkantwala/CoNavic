@@ -197,7 +197,7 @@ function addMessageToChat(message, isUser = false) {
 
 // Remove marked.js injection and use a minimal markdown parser instead
 
-// Helper to parse markdown to HTML (supports code blocks, bold, italics, strikethrough, lists, blockquotes, tables, links)
+// Helper to parse markdown to HTML (supports code blocks, bold, italics, strikethrough, lists, blockquotes, tables, links, headers)
 function parseMarkdown(md) {
   // Escape HTML special chars first
   md = md.replace(/[&<>]/g, function(tag) {
@@ -210,17 +210,13 @@ function parseMarkdown(md) {
   // Inline code: `code`
   md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // Bold-italic: ***text*** or ___text___
-  md = md.replace(/(\*\*\*|___)(.*?)\1/g, '<strong><em>$2</em></strong>');
-  // Bold: **text** or __text__
-  md = md.replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>');
-  // Italic: *text* or _text_
-  md = md.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
-  // Strikethrough: ~~text~~
-  md = md.replace(/~~(.*?)~~/g, '<del>$1</del>');
-
-  // Links: [text](url)
-  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  // Headers: ###, ##, #
+  md = md.replace(/^###### (.*)$/gm, '<h6>$1</h6>');
+  md = md.replace(/^##### (.*)$/gm, '<h5>$1</h5>');
+  md = md.replace(/^#### (.*)$/gm, '<h4>$1</h4>');
+  md = md.replace(/^### (.*)$/gm, '<h3>$1</h3>');
+  md = md.replace(/^## (.*)$/gm, '<h2>$1</h2>');
+  md = md.replace(/^# (.*)$/gm, '<h1>$1</h1>');
 
   // Blockquotes: > text
   md = md.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');
@@ -251,8 +247,21 @@ function parseMarkdown(md) {
     return `${pre}<ol>${items}</ol>`;
   });
 
-  // Line breaks (preserve inside paragraphs, but not inside <pre> or <code>)
-  md = md.replace(/(?<!<\/pre>)(?<!<\/code>)\n/g, '<br>');
+  // Bold-italic: ***text*** or ___text___
+  md = md.replace(/(\*\*\*|___)(.*?)\1/g, '<strong><em>$2</em></strong>');
+  // Bold: **text** or __text__
+  md = md.replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>');
+  // Italic: *text* or _text_
+  md = md.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
+  // Strikethrough: ~~text~~
+  md = md.replace(/~~(.*?)~~/g, '<del>$1</del>');
+
+  // Links: [text](url)
+  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // Line breaks (preserve inside paragraphs, but not inside <pre> or <code> or after block elements)
+  // Only add <br> for lines that do not end with a block-level tag
+  md = md.replace(/([^\n>])\n(?!\s*<\/?(?:h[1-6]|ul|ol|li|pre|code|blockquote|table|thead|tbody|tr|th|td)[^>]*>)/g, '$1<br>');
 
   return md;
 }
@@ -374,6 +383,28 @@ function toggleChatBar() {
   }
 }
 
+// New: Helper to extract error message from error object or string
+function extractErrorMessage(error) {
+  if (!error) return "Unknown error";
+  if (typeof error === "string") return error;
+  if (typeof error === "object") {
+    if (error.error && typeof error.error === "string") return error.error;
+    if (error.error && error.error.message) return error.error.message;
+    if (error.details && error.details.error && error.details.error.message) return error.details.error.message;
+    if (error.message) return error.message;
+    if (error.status && error.details && error.details.error && error.details.error.message) {
+      // Special handling for Azure OpenAI 429
+      return `Rate limit exceeded: ${error.details.error.message}`;
+    }
+    try {
+      return JSON.stringify(error);
+    } catch {
+      return "Unknown error";
+    }
+  }
+  return String(error);
+}
+
 // Listen for messages from background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "toggle_chatbar") {
@@ -397,7 +428,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.action === "stream_error" && request.requestId === activeRequestId) {
     hideLLMLoadingIndicator();
     if (currentResponseElement) {
-      currentResponseElement.textContent += "\nError: " + request.error;
+      // Handle error object or string
+      let errorMsg = extractErrorMessage(request.error);
+      currentResponseElement.textContent += "\nError: " + errorMsg;
+      // Optionally, show a status message for rate limit
+      if (errorMsg.toLowerCase().includes("rate limit")) {
+        showStatusMessage(errorMsg, true);
+      }
     }
     resetChatInterface();
   } else if (request.action === "tabs_info") {
@@ -426,7 +463,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         
         const content = document.createElement('div');
         content.classList.add('quickgpt-message-content', 'quickgpt-error');
-        content.textContent = "Error creating plan: " + request.error;
+        content.textContent = "Error creating plan: " + extractErrorMessage(request.error);
         
         messageEl.appendChild(content);
         chatHistory.appendChild(messageEl);

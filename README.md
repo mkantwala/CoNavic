@@ -1,5 +1,3 @@
-# CoNavic: Free & Open Source AI-Powered Browser Assistant
-
 **CoNavic** is a free, open-source browser extension that brings the power of ChatGPT and browser automation directly to your fingertips. Instantly access AI assistance, manage tabs, and organize bookmarks using natural language—all securely within your browser.
 
 ---

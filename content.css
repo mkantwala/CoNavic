@@ -24,14 +24,6 @@
   display: none;
 }
 
-/* Remove #quickgpt-chat-bar and its ::before */
-/* #quickgpt-chat-bar {
-  ...existing code...
-}
-#quickgpt-chat-bar::before {
-  ...existing code...
-} */
-
 /* Animated border for input container */
 .quickgpt-input-container {
   width: 100%;
@@ -315,7 +307,7 @@ body.quickgpt-blur-active > *:not(#quickgpt-shadow-host) {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(16,163,127,0.18);
+  background: rgba(54, 91, 140, 0.18);
   position: relative;
   animation: quickgpt-grow 1s infinite cubic-bezier(.4,0,.2,1);
   vertical-align: middle;
