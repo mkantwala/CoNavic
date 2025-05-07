@@ -78,9 +78,9 @@ End every response with a helpful, neutral tone. If a request cannot be fulfille
     }
 
     const payload = {
-      // "model": "openai-large",
+      "model": "openai-large",
       // "model": "openai-reasoning",
-      "model": "openai",
+      // "model": "openai",
       "messages": this.messages,
       "private": true, 
       "referrer": "CoNavic Extension",

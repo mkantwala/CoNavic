@@ -5,9 +5,8 @@
   "description": "Quickly access ChatGPT from anywhere with Ctrl+Shift+K",
   "permissions": [
     "activeTab",
-    "storage",
     "tabs",
-    "scripting",
+  
     "tabGroups",
     "bookmarks"
   ],
