@@ -135,12 +135,10 @@ Free for personal and commercial use.
 
 - [GitHub Repository](https://github.com/mkantwala/CoNavic)
 - Open issues or discussions for help and suggestions
+- Contact support@suchtech.ca for any queries.
 
 ---
 
 **Enjoy using CoNavic! If you find it useful, star the repo and share it with others.**
-```
 
----
-
-Let me know if you also want a matching `manifest.json` or promo visuals for the Chrome Web Store!
+<a href="https://www.producthunt.com/posts/conavic?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-conavic" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=960016&theme=light&t=1746106996007" alt="CoNavic - AI&#0045;Powered&#0032;Browser&#0032;Assistant | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
