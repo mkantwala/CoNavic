@@ -49,6 +49,16 @@ This is where **CoNavic** comes in.
 
 ---
 
+
+# Demos
+
+<br/><br/>
+
+[![CoNavic](https://github.com/mkantwala/CoNavic/blob/master/Demo-ezgif.com-video-to-gif-converter.gif)](https://youtu.be/H4EFP_7A3Yw)
+
+<br/><br/>
+
+
 ## 💡 How to Use
 
 1. **Open the Chat Bar**  
