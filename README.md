@@ -34,7 +34,9 @@ This is where **CoNavic** comes in.
 
 # ADD FROM CHROME WEB STORE
 
-https://chrome.google.com/webstore/devconsole/02f96fdd-8997-43fa-b315-cb3d877ffa73/onaeonbmbaifcinofnfpkapknadmndep
+Check out this item on the Chrome Web Store https://chromewebstore.google.com/detail/onaeonbmbaifcinofnfpkapknadmndep?utm_source=item-share-cp
+
+
 <br><br>
 <b>OR</b>
 <br><br>
