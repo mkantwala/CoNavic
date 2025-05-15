@@ -32,6 +32,13 @@ This is where **CoNavic** comes in.
 
 ## 🛠️ Installation
 
+# ADD FROM CHROME WEB STORE
+
+https://chrome.google.com/webstore/devconsole/02f96fdd-8997-43fa-b315-cb3d877ffa73/onaeonbmbaifcinofnfpkapknadmndep/edit
+<br><br>
+<b>OR</b>
+<br><br>
+
 1. **Clone or Download this Repository**
    ```sh
    git clone https://github.com/mkantwala/CoNavic.git
