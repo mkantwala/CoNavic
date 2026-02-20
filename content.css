@@ -1,16 +1,19 @@
+:host {
+  color-scheme: light;
+}
+
 #quickgpt-chat-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 22px;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;
-  background-color: transparent;
+  width: min(92vw, 560px);
   z-index: 999999;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: opacity 0.3s, transform 0.3s;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  gap: 12px;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 #quickgpt-chat-container.quickgpt-hidden {
@@ -19,296 +22,206 @@
   transform: translateX(-50%) translateY(10px);
 }
 
-/* Hide chat history when empty */
 .quickgpt-chat-history:empty {
   display: none;
 }
 
-/* Animated border for input container */
 .quickgpt-input-container {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0;
   position: relative;
-  margin: 0;
-  min-height: 54px;
-  height: 54px;
-  border-radius: 25px;
-  background-clip: padding-box;
-  border: 4px solid transparent;
-  box-sizing: border-box;
-  /* Animated border effect */
-}
-.quickgpt-input-container::before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  border-radius: 25px;
-  background: linear-gradient(45deg, rgba(255,126,179,0.8), rgba(255,117,140,0.8), rgba(126,188,255,0.8), rgba(88,207,255,0.8));
-  background-size: 300% 300%;
-  animation: gradient-shift 3s infinite;
-  pointer-events: none;
+  min-height: 56px;
+  border-radius: 16px;
+  border: 1px solid #d7dee8;
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(16, 24, 40, 0.14);
 }
 
 .quickgpt-input {
   width: 100%;
-  border: none;
-  height: 45px; 
-  font-size: 16px;
+  border: 0;
+  height: 54px;
+  font-size: 15px;
+  color: #111827;
   outline: none;
-  padding: 0 12px;
-  padding-right: 39px; 
-  box-sizing: border-box;
-  border-radius: 20.5px; 
-  background-color: #f5f5f5;
+  padding: 0 16px;
+  padding-right: 50px;
+  border-radius: 16px;
+  background: transparent;
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.quickgpt-input::placeholder {
+  color: #6b7280;
 }
 
 .quickgpt-chat-history {
   width: 100%;
-  max-height: 400px;
-  overflow-y: overlay; /* Use overlay to avoid scrollbar overlaying content (Chromium) */
+  max-height: 420px;
+  overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  background-color: #ffffff;
-  border-radius: 25px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 21px 24px 21px 16px; /* Increased right padding for scrollbar */
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  border-radius: 16px;
+  border: 1px solid #d7dee8;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.16);
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  position: relative;
-  border: 4px solid transparent;
-  background-clip: padding-box;
-  overflow: auto;
-  overflow: clip auto;
+  gap: 10px;
 }
 
-/* Custom scrollbar styling */
 .quickgpt-chat-history::-webkit-scrollbar {
-  width: 10px; /* Slightly wider for easier use */
-  background: transparent;
-  border-radius: 25px;
+  width: 10px;
 }
 
 .quickgpt-chat-history::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 25px;
-  margin: 8px 0;
-  box-shadow: none; /* Remove inset shadow to avoid overflow */
+  background: transparent;
 }
 
 .quickgpt-chat-history::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.18);
-  border-radius: 25px;
-  border: 2px solid #fff; /* Ensures thumb stays inside the chat window */
-  box-sizing: border-box;
+  background: rgba(100, 116, 139, 0.4);
+  border-radius: 10px;
 }
 
 .quickgpt-chat-history::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.28);
-}
-
-/* Firefox scrollbar support */
-@supports (scrollbar-width: thin) {
-  .quickgpt-chat-history {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.18) #fff;
-    padding-right: 18px; /* Extra space for Firefox scrollbar */
-  }
-}
-
-.quickgpt-chat-history::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  border-radius: 25px; /* was 12px, updated for consistency */
-  background: linear-gradient(45deg, rgba(255,126,179,0.8), rgba(255,117,140,0.8), rgba(126,188,255,0.8), rgba(88,207,255,0.8));
-  background-size: 300% 300%;
-  animation: gradient-shift 3s infinite;
-  pointer-events: none;
+  background: rgba(71, 85, 105, 0.55);
 }
 
 .quickgpt-send-button {
-  background-color: #b0b0b0;
+  background: #0f766e;
   color: #fff;
   border: none;
-  border-radius: 50%;
-  width: 33px; /* 28px + 5px */
-  height: 33px; /* 28px + 5px */
-  min-width: 33px;
-  min-height: 33px;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  margin: 0; /* Remove margin for tight fit */
   cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
-  transition: background 0.2s;
-  box-shadow: none;
+  transition: transform 0.16s ease, background-color 0.16s ease;
 }
 
 .quickgpt-send-button svg {
   display: block;
-  width: 19px; /* 16px + 3px */
-  height: 19px;
-  color: #fff;
 }
 
 .quickgpt-send-button:hover {
-  background-color: #8c8c8c;
+  transform: translateY(-1px);
+  background: #0d665f;
 }
 
 .quickgpt-send-button:disabled {
-  background-color: #cccccc;
+  background: #94a3b8;
   cursor: not-allowed;
 }
 
-/* Red state for send button when acting as stop */
 .quickgpt-send-button.quickgpt-stop-state {
-  background-color: #e74c3c;
+  background: #dc2626;
 }
+
 .quickgpt-send-button.quickgpt-stop-state:hover {
-  background-color: #c0392b;
+  background: #b91c1c;
 }
-
-
-
 
 .quickgpt-message {
   display: flex;
-  gap: 10px;
-  animation: fadeIn 0.3s ease-out;
   width: 100%;
 }
 
-/* User message alignment (right) */
 .quickgpt-user-message {
   justify-content: flex-end;
-  flex-direction: row-reverse;
-  align-self: flex-end;
-  text-align: right;
-  width: 95%; /* Control overall width of the message container */
-  margin-left: auto; /* Push to the right edge */
-  margin-right: 0;
-  padding-left: 10px; /* Add padding to match the right side spacing */
 }
 
-/* AI message alignment (left) */
 .quickgpt-ai-message {
   justify-content: flex-start;
-  align-self: flex-start;
-  text-align: left;
-  width: 95%; /* Control overall width of the message container */
-  margin-right: auto; /* Push to the left edge */
-  margin-left: 0;
-  padding-right: 10px; /* Add padding to match the left side spacing */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .quickgpt-message-content {
-  background-color: #f7f7f7;
-  padding: 12px 15px;
+  padding: 10px 12px;
   border-radius: 12px;
   line-height: 1.5;
   font-size: 14px;
-  color: #333333;
+  color: #1f2937;
   word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  max-width: 90%; /* Adjusted from 95% to be more consistent */
+  overflow-wrap: anywhere;
+  max-width: 88%;
 }
 
 .quickgpt-user-message .quickgpt-message-content {
-  background-color: #dcf8c6; /* WhatsApp-like green for user messages */
-  border-bottom-right-radius: 4px; /* Sharper corner on bottom right */
-  align-self: flex-end;
-  margin-left: auto; /* Ensure the message box itself is right-aligned */
-  max-width: 85%; /* Make user messages slightly more compact */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-  position: relative;
+  background: #dff4ef;
+  border: 1px solid #c1e5dd;
+  color: #0f3d38;
+  border-bottom-right-radius: 4px;
 }
 
 .quickgpt-ai-message .quickgpt-message-content {
-  background-color: #f1f1f1;
-  border-bottom-left-radius: 4px; /* Sharper corner on bottom left */
-  align-self: flex-start;
-  max-width: 90%;
+  background: #f4f6fb;
+  border: 1px solid #dee5f2;
+  border-bottom-left-radius: 4px;
 }
 
 .quickgpt-ai-message .quickgpt-message-content strong {
-  font-weight: bold;
-  color: #10a37f;
+  color: #0f766e;
 }
 
 .quickgpt-message-content pre {
-  background-color: #2d2d2d;
-  color: #ffffff;
+  background: #111827;
+  color: #f9fafb;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow-x: auto;
-  font-family: monospace;
-  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
   margin: 10px 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
 }
 
 .quickgpt-error {
-  color: #e74c3c;
-  font-weight: bold;
+  color: #b91c1c;
+  font-weight: 600;
 }
 
-/* Blur effect for page background when chat is active */
-body.quickgpt-blur-active > *:not(#quickgpt-shadow-host) {
-  filter: blur(6px) !important;
-  transition: filter 0.3s;
-  pointer-events: none;
-  user-select: none;
+.quickgpt-status-message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 68px;
+  margin: 0 auto;
+  width: calc(100% - 4px);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  text-align: center;
+  z-index: 1000001;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
 }
 
-/* Prevent blur on the shadow host (chat UI) */
-#quickgpt-shadow-host {
-  filter: none !important;
-  pointer-events: auto;
-  user-select: auto;
+.quickgpt-status-message.quickgpt-status-error {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
-/* Add animation for growing/shrinking circle (LLM loading indicator) */
-@keyframes quickgpt-grow {
-  0%   { transform: scale(0.8); opacity: 0.7; }
-  50%  { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.8); opacity: 0.7; }
+.quickgpt-status-message.quickgpt-status-success {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
 }
 
-/* Style for the animated circle in the loading indicator */
+@keyframes quickgpt-pulse {
+  0%,
+  100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
 .quickgpt-llm-loading-message .quickgpt-loading-circle {
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: rgba(54, 91, 140, 0.18);
-  position: relative;
-  animation: quickgpt-grow 1s infinite cubic-bezier(.4,0,.2,1);
+  background: rgba(15, 118, 110, 0.24);
+  animation: quickgpt-pulse 1s infinite cubic-bezier(.4, 0, .2, 1);
   vertical-align: middle;
 }
