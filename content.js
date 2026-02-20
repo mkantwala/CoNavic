@@ -310,13 +310,6 @@ function sendToExecutor(message) {
   chrome.runtime.sendMessage(
     { action: "get_plan", plan: message },
     (response) => {
-      if (chrome.runtime.lastError) {
-        const el = addMessageToChat(`Error: ${chrome.runtime.lastError.message}`, false);
-        currentResponseElement = el;
-        resetChatInterface();
-        return;
-      }
-
       // Hide LLM loading indicator when response is received
       hideLLMLoadingIndicator();
 
@@ -497,8 +490,18 @@ function showStatusMessage(message, isError = false) {
   
   const statusEl = document.createElement('div');
   statusEl.classList.add('quickgpt-status-message');
-  statusEl.classList.add(isError ? 'quickgpt-status-error' : 'quickgpt-status-success');
   statusEl.textContent = message;
+  statusEl.style.position = 'absolute';
+  statusEl.style.bottom = '60px';
+  statusEl.style.left = '0';
+  statusEl.style.width = '100%';
+  statusEl.style.padding = '10px';
+  statusEl.style.backgroundColor = isError ? '#ffebee' : '#e8f5e9';
+  statusEl.style.color = isError ? '#c62828' : '#2e7d32';
+  statusEl.style.borderRadius = '8px';
+  statusEl.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+  statusEl.style.zIndex = '1000001';
+  statusEl.style.textAlign = 'center';
   
   chatContainer.appendChild(statusEl);
   
