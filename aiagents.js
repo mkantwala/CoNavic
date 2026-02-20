@@ -101,22 +101,40 @@ End every response with a helpful, neutral tone. If a request cannot be fulfille
 
     );
 
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Backend request failed (${response.status}): ${errorBody || response.statusText}`);
+    }
+
     // Check for abort after fetch
     if (abortSignal && abortSignal.aborted) {
       throw new Error("Execution aborted");
     }
 
     const output = await response.json();
+    if (!output || !Array.isArray(output.choices) || output.choices.length === 0) {
+      throw new Error("Backend returned an invalid response payload.");
+    }
+
+    const firstChoice = output.choices[0];
+    if (!firstChoice.message) {
+      throw new Error("Backend response did not contain a message.");
+    }
+
     console.log("API Response:", output);
     // tool call
-    if (output.choices[0]["finish_reason"] === "tool_calls") {
+    if (firstChoice["finish_reason"] === "tool_calls") {
+
+      if (!Array.isArray(firstChoice.message.tool_calls) || firstChoice.message.tool_calls.length === 0) {
+        throw new Error("Backend requested tool execution but did not provide tool call details.");
+      }
 
       console.log("Tool call detected. Executing tools...");
       const toolCalls = [];
       const tmp = [];
 
       // Correctly iterate over the array of tool_calls
-      for (const tool of output.choices[0].message.tool_calls) {
+      for (const tool of firstChoice.message.tool_calls) {
 
         toolCalls.push(
           {
@@ -134,7 +152,18 @@ End every response with a helpful, neutral tone. If a request cannot be fulfille
         }
 
         const fn = this.browserManager[tool.function.name];
-        const args = Object.values(JSON.parse(tool.function.arguments));
+        if (typeof fn !== "function") {
+          throw new Error(`Unsupported tool requested by backend: ${tool.function.name}`);
+        }
+
+        let parsedArguments = {};
+        try {
+          parsedArguments = JSON.parse(tool.function.arguments || "{}");
+        } catch {
+          throw new Error(`Invalid tool arguments for ${tool.function.name}`);
+        }
+
+        const args = Object.values(parsedArguments);
         // Await tool call, pass abortSignal if function supports it
         const task_response = await fn.apply(this.browserManager, args)
 
@@ -167,8 +196,8 @@ End every response with a helpful, neutral tone. If a request cannot be fulfille
     
     else {
       console.log("Execution finished successfully.");
-      console.log("Output:", output.choices[0].message.content);
-      return output.choices[0].message.content;
+      console.log("Output:", firstChoice.message.content);
+      return firstChoice.message.content || "Task completed successfully.";
     }
       
 

@@ -5,99 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CoNavic - Extension Info</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      width: 320px;
-      padding: 15px;
+    :root {
+      color-scheme: light;
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #4b5563;
+      --brand: #0f766e;
+      --brand-soft: #e6f4f1;
+      --border: #d6dde8;
+      --shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
     }
-    h1 {
-      font-size: 20px;
-      color: #10a37f;
-      margin-top: 0;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      width: 360px;
+      padding: 18px;
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #ffffff 0, #f3f6fb 62%, #edf2f9 100%);
+      color: var(--text);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
-    h2 {
-      font-size: 16px;
-      margin-top: 20px;
-      margin-bottom: 10px;
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
     }
-    p {
-      font-size: 14px;
-      color: #333;
-      line-height: 1.4;
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      color: #0b4d47;
+      letter-spacing: -0.02em;
     }
-    .api-key-section {
-      margin-top: 15px;
-      margin-bottom: 15px;
+
+    .tagline {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
     }
-    input[type="password"] {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+
+    .section-title {
+      margin: 18px 0 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0d5d55;
+      font-weight: 700;
     }
-    button {
-      background-color: #10a37f;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 15px;
-      cursor: pointer;
-      font-weight: bold;
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 20px;
+      color: #1f2937;
     }
-    button:hover {
-      background-color: #0e8a6c;
+
+    li {
+      margin: 0 0 8px;
+      font-size: 13px;
+      line-height: 1.45;
     }
+
     .shortcut {
-      background-color: #f0f0f0;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-      font-weight: bold;
-    }
-    .status {
-      margin-top: 10px;
-      font-size: 14px;
-      font-style: italic;
-    }
-    .footer {
-      margin-top: 20px;
+      display: inline-block;
+      background: var(--brand-soft);
+      color: #0c5f58;
+      border: 1px solid #b8ddd7;
+      padding: 1px 6px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 12px;
-      color: #777;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #e7edf7;
+      font-size: 12px;
+      color: #6b7280;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>
-    <img src="icons/icon48.png" alt="CoNavic Logo" style="width:32px;height:32px;vertical-align:middle;border-radius:8px;">
-    <span>CoNavic</span>
-  </h1>
-  <p>
-    <strong>CoNavic</strong> is a browser extension that brings the power of ChatGPT and browser automation to your fingertips. Instantly access AI assistance, manage tabs, and organize bookmarks using natural language, all from any page.
-  </p>
-  <h2>Key Features</h2>
-  <ul>
-    <li>Open the chat bar anywhere with <span class="shortcut">Ctrl+Shift+K</span></li>
-    <li>Ask ChatGPT questions and get instant, markdown-formatted answers</li>
-    <li>Automate browser tasks: open/close tabs, group tabs, move tabs, and more</li>
-    <li>Organize bookmarks and folders using AI commands</li>
-    <li>All actions are performed securely in your browser</li>
-  </ul>
+  <main class="panel">
+    <div class="brand">
+      <img src="icons/icon48.png" alt="CoNavic logo">
+      <h1>CoNavic</h1>
+    </div>
 
-  <h2>How to Use</h2>
-  <ol>
-    <li>Press <span class="shortcut">Ctrl+Shift+K</span> to open the chat bar</li>
-    <li>Type your question or command (e.g., "Open GitHub in a new tab")</li>
-    <li>Press Enter to send</li>
-    <li>See responses and actions performed instantly</li>
-  </ol>
-  <div class="footer">
-    CoNavic v1.0 &mdash; AI-powered browser navigation and automation
-  </div>
+    <p class="tagline">
+      AI-powered browser assistant for natural language tab management, bookmark organization, and instant answers.
+    </p>
+
+    <h2 class="section-title">Key Features</h2>
+    <ul>
+      <li>Open the assistant on any page with <span class="shortcut">Ctrl+Shift+K</span>.</li>
+      <li>Run browser actions with clear, markdown-formatted AI responses.</li>
+      <li>Keep workflows private with in-browser automation controls.</li>
+    </ul>
+
+    <h2 class="section-title">How to Use</h2>
+    <ol>
+      <li>Press <span class="shortcut">Ctrl+Shift+K</span> from any tab.</li>
+      <li>Enter a request such as “Group tabs by domain”.</li>
+      <li>Review results and continue in the same chat session.</li>
+    </ol>
+
+    <div class="footer">
+      CoNavic v1.0 · Production-ready AI browser automation
+    </div>
+  </main>
 
   <script src="popup.js"></script>
 </body>
